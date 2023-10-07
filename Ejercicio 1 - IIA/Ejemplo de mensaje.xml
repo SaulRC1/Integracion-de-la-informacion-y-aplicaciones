@@ -1,0 +1,101 @@
+<!-- Salida del Grading Management System -->
+<Acta>
+  <Cursos>
+    <Primero>
+      <Alumnos>
+
+        <Alumno>
+
+          <DNI>12345678A</DNI>
+          <Nombre>Juan Alberto</Nombre>
+          <Apellidos>Domínguez Vázquez</Apellidos>
+
+          <Asignaturas>
+
+            <Asignatura>
+              <Nombre>IIA</Nombre>
+              <Calificacion>7.5</Calificacion>
+              <Convocatoria>1</Convocatoria>
+            </Asignatura>
+
+            ...
+
+          </Asignaturas>
+
+        </Alumno>
+
+        <Alumno>
+
+          <DNI>12345678B</DNI>
+          <Nombre>Saúl</Nombre>
+          <Apellidos>Rodríguez Naranjo</Apellidos>
+
+          <Asignaturas>
+
+            <Asignatura>
+              <Nombre>IIA</Nombre>
+              <Calificacion>8.0</Calificacion>
+              <Convocatoria>1</Convocatoria>
+            </Asignatura>
+
+            ...
+
+          </Asignaturas>
+
+        </Alumno>
+
+      </Alumnos>
+    </Primero>
+
+    <Segundo>
+      ...
+    </Segundo>
+
+    <Tercero>
+      ...
+    </Tercero>
+
+    ...
+  </Cursos>
+</Acta>
+
+<!-- Salida del Student Management System -->
+<Contacto>
+  <correo>saul.rodriguez869@alu.uhu.es</correo>
+  <telefono>668989765</telefono>
+</Contacto>
+
+<Contacto>
+  <correo>juanalberto.dominguez256@alu.uhu.es</correo>
+  <telefono>987654321</telefono>
+</Contacto>
+
+<!-- Salida del Correlation ID Setter 1 -->
+<header>
+  <id>1</id>
+</header>
+<content>
+  <DNI>12345678A</DNI>
+  <Nombre>Juan Alberto</Nombre>
+  <Apellidos>Domínguez Vázquez</Apellidos>
+</content>
+
+<!-- Salida del Correlation ID Setter 2 -->
+<header>
+  <id>1</id>
+</header>
+<content>
+  <Asignaturas>
+
+    <Asignatura>
+      <Nombre>IIA</Nombre>
+      <Calificacion>8.0</Calificacion>
+      <Convocatoria>1</Convocatoria>
+    </Asignatura>
+
+    ...
+
+  </Asignaturas>
+</content>
+
+SELECT correo, telefono FROM ALUMNOS WHERE DNI = "..." AND Nombre = "..." AND Apellidos = "..."
