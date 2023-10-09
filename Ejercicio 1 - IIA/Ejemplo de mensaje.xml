@@ -99,3 +99,21 @@
 </content>
 
 SELECT correo, telefono FROM ALUMNOS WHERE DNI = "..." AND Nombre = "..." AND Apellidos = "..."
+
+<!-- Salida del Student Management System alternativa -->
+<Contacto>
+  <correo>saul.rodriguez869@alu.uhu.es</correo>
+  <telefono>668989765</telefono>
+
+  <Asignaturas>
+
+    <Asignatura>
+      <Nombre>IIA</Nombre>
+      <Calificacion>8.0</Calificacion>
+      <Convocatoria>1</Convocatoria>
+    </Asignatura>
+
+    ...
+
+  </Asignaturas>
+</Contacto>
