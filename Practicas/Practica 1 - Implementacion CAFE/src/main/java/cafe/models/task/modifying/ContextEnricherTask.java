@@ -3,7 +3,6 @@ package cafe.models.task.modifying;
 import cafe.models.task.Task;
 import cafe.models.slot.Slot;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
