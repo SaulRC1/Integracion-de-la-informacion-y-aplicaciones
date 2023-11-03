@@ -10,22 +10,17 @@ import java.util.UUID;
  * @author Juan Alberto Dominguez Vazquez
  */
 public class ContextEnricherTask extends Task
-{  
-    public ContextEnricherTask(UUID id, List<Slot> inputSlots, List<Slot> outputSlots)
+{
+
+    public ContextEnricherTask(List<Slot> inputSlots, List<Slot> outputSlots)
     {
-        super(id, inputSlots, outputSlots);
+        super(inputSlots, outputSlots);
     }
 
     @Override
     public void doTask()
     {
-        
-    }  
 
-    @Override
-    public UUID getId()
-    {
-        return super.getId(); 
     }
-    
+
 }

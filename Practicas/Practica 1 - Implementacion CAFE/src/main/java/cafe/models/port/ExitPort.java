@@ -2,7 +2,6 @@ package cafe.models.port;
 
 import cafe.models.message.Message;
 import cafe.models.slot.Slot;
-import java.util.UUID;
 
 /**
  *
@@ -10,14 +9,16 @@ import java.util.UUID;
  */
 public class ExitPort extends Port
 {
+
     private Slot slot;
 
     public ExitPort()
     {
-      
+
     }
-    
-    public Message read(Message message) {
+
+    public Message read(Message message)
+    {
         return null;
     }
 
@@ -30,10 +31,4 @@ public class ExitPort extends Port
     {
         this.slot = slot;
     }
-
-    @Override
-    public UUID getId()
-    {
-        return super.getId(); 
-    }    
 }

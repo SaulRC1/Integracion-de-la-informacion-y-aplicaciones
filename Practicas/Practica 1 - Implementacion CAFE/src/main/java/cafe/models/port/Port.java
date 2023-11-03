@@ -1,23 +1,23 @@
 package cafe.models.port;
 
-import java.util.Random;
-import java.util.UUID;
+import cafe.sequence.PortSequence;
+import cafe.sequence.Sequence;
 
 /**
  *
  * @author Juan Alberto Dominguez Vazquez
  */
-public class Port
+public abstract class Port
 {
-
-    private UUID id;
+    private long id;
 
     public Port()
     {
-        this.id = UUID.randomUUID();
+        Sequence portSequence = PortSequence.getPortSequenceInstance();
+        this.id = portSequence.getNextIdentifier();
     }
 
-    public UUID getId()
+    public long getId()
     {
         return id;
     }

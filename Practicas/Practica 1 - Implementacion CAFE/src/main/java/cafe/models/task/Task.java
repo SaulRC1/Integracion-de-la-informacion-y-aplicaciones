@@ -2,8 +2,9 @@ package cafe.models.task;
 
 import cafe.models.message.Message;
 import cafe.models.slot.Slot;
+import cafe.sequence.Sequence;
+import cafe.sequence.TaskSequence;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -11,13 +12,14 @@ import java.util.UUID;
  */
 public abstract class Task
 {
-    private UUID id;  
+    private long id;  
     private List<Slot> inputSlots;
     private List<Slot> outputSlots;
 
-    public Task(UUID id, List<Slot> inputSlots, List<Slot> outputSlots)
+    public Task(List<Slot> inputSlots, List<Slot> outputSlots)
     {
-        this.id = id;
+        Sequence taskSequence = TaskSequence.getTaskSequenceInstance();
+        this.id = taskSequence.getNextIdentifier();
         this.inputSlots = inputSlots;
         this.outputSlots = outputSlots;
     }
@@ -30,9 +32,7 @@ public abstract class Task
         
     }
     
-    public void doTask() {
-        
-    }
+    public abstract void doTask();
 
     public List<Slot> getInputSlots()
     {
@@ -54,7 +54,7 @@ public abstract class Task
         this.outputSlots = outputSlots;
     }
 
-    public UUID getId()
+    public long getId()
     {
         return id;
     }    

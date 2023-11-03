@@ -3,7 +3,6 @@ package cafe.models.task.routing;
 import cafe.models.task.Task;
 import cafe.models.slot.Slot;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -11,9 +10,9 @@ import java.util.UUID;
  */
 public class CorrelatorTask extends Task
 {
-    public CorrelatorTask(UUID id, List<Slot> inputSlots, List<Slot> outputSlots)
+    public CorrelatorTask(List<Slot> inputSlots, List<Slot> outputSlots)
     {
-        super(id, inputSlots, outputSlots);
+        super(inputSlots, outputSlots);
     }
 
     @Override

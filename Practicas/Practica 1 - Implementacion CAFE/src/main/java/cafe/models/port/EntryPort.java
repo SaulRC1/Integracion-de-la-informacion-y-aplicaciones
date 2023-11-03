@@ -10,15 +10,17 @@ import java.util.UUID;
  */
 public class EntryPort extends Port
 {
+
     private Slot slot;
 
     public EntryPort()
     {
-        
+
     }
-    
-    public void write(Message message) {
-        
+
+    public void write(Message message)
+    {
+
     }
 
     public Slot getSlot()
@@ -30,10 +32,4 @@ public class EntryPort extends Port
     {
         this.slot = slot;
     }
-
-    @Override
-    public UUID getId()
-    {
-        return super.getId(); 
-    }   
 }
