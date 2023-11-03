@@ -11,25 +11,21 @@ import java.util.UUID;
 public class EntryPort extends Port
 {
 
-    private Slot slot;
+    private final Slot slot;
 
-    public EntryPort()
+    public EntryPort(Slot slot)
     {
-
+        this.slot = slot;
     }
 
     public void write(Message message)
     {
-
+        this.slot.write(message);
     }
 
     public Slot getSlot()
     {
         return slot;
     }
-
-    public void setSlot(Slot slot)
-    {
-        this.slot = slot;
-    }
+    
 }

@@ -10,9 +10,24 @@ public class Message
 {
     private Document document;
     private Document documentMetaData;
+    
+    private static final String NULL_DOCUMENT_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
+            = "The document must not be null";
+    private static final String NULL_DOCUMENT_METADATA_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE
+            = "The document metadata must not be null";
 
     public Message(Document document, Document documentMetaData)
     {
+        if(document == null)
+        {
+            throw new IllegalArgumentException(NULL_DOCUMENT_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+        
+        if(documentMetaData == null)
+        {
+            throw new IllegalArgumentException(NULL_DOCUMENT_METADATA_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+        
         this.document = document;
         this.documentMetaData = documentMetaData;
     }   
@@ -24,6 +39,11 @@ public class Message
 
     public void setDocument(Document document)
     {
+        if(document == null)
+        {
+            throw new IllegalArgumentException(NULL_DOCUMENT_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+        
         this.document = document;
     }
 
@@ -34,6 +54,11 @@ public class Message
 
     public void setDocumentMetaData(Document documentMetaData)
     {
+        if(documentMetaData == null)
+        {
+            throw new IllegalArgumentException(NULL_DOCUMENT_METADATA_ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE);
+        }
+        
         this.documentMetaData = documentMetaData;
     }
     
