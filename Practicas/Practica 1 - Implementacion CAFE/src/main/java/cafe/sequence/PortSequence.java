@@ -1,14 +1,17 @@
 package cafe.sequence;
 
+import cafe.models.port.Port;
+
 /**
- *
+ * Sequence for all the {@link Port} present in the program.
+ * 
  * @author Juan Alberto Dominguez Vazquez
  */
 public class PortSequence implements Sequence
 {
 
     private static long PORT_SEQUENCE_NUMBER = 0;
-    private static PortSequence portSequenceInstance = new PortSequence();
+    private static final PortSequence portSequenceInstance = new PortSequence();
 
     private PortSequence()
     {
@@ -25,6 +28,11 @@ public class PortSequence implements Sequence
         return nextIdentifier;
     }
 
+    /**
+     * This method will return the {@link PortSequence} instance.
+     * 
+     * @return The {@link PortSequence} instance.
+     */
     public static PortSequence getPortSequenceInstance() 
     {
         return portSequenceInstance;

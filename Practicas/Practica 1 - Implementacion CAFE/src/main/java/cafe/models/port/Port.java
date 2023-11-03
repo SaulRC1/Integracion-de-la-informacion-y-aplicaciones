@@ -9,7 +9,7 @@ import cafe.sequence.Sequence;
  */
 public abstract class Port
 {
-    private long id;
+    private final long id;
 
     public Port()
     {

@@ -12,7 +12,7 @@ import java.util.List;
  */
 public abstract class Task
 {
-    private long id;  
+    private final long id;  
     private List<Slot> inputSlots;
     private List<Slot> outputSlots;
 
