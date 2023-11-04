@@ -60,6 +60,5 @@ public class Message
         }
         
         this.documentMetaData = documentMetaData;
-    }
-    
+    }   
 }

@@ -12,9 +12,9 @@ import java.util.List;
 public class ReplicatorTask extends Task
 {
 
-    public ReplicatorTask(List<Slot> inputSlots, List<Slot> outputSlots)
+    public ReplicatorTask(Slot inputSlot, List<Slot> outputSlots)
     {
-        super(inputSlots, outputSlots);
+        super(List.of(inputSlot), outputSlots);
     }
 
     /**

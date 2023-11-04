@@ -12,9 +12,9 @@ import java.util.List;
 public class MergerTask extends Task
 {
 
-    public MergerTask(List<Slot> inputSlots, List<Slot> outputSlots)
+    public MergerTask(List<Slot> inputSlots, Slot outputSlot)
     {
-        super(inputSlots, outputSlots);
+        super(inputSlots, List.of(outputSlot));
     }
 
     @Override
