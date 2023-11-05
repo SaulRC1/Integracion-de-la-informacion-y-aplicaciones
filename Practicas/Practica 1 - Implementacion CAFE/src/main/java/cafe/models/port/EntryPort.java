@@ -2,7 +2,6 @@ package cafe.models.port;
 
 import cafe.models.message.Message;
 import cafe.models.slot.Slot;
-import java.util.UUID;
 
 /**
  *
