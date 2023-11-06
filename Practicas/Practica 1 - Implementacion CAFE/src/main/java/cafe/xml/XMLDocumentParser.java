@@ -23,6 +23,9 @@ public class XMLDocumentParser
 {
     private static final DocumentBuilderFactory documentBuilderFactory
             = DocumentBuilderFactory.newInstance();
+    
+    private static final String NOT_XML_EXTENSION_MESSAGE = "The file does not"
+            + "have .xml extension.";
 
     /**
      * Parses a XML document.
@@ -37,14 +40,22 @@ public class XMLDocumentParser
      * 
      * @throws SAXException If any parse error occurs.
      * 
-     * @throws IOException If any IO exception occurs
+     * @throws IOException If any IO exception occurs.
+     * 
+     * @throws cafe.xml.WrongDocumentExtensionException When the file does not
+     * have .xml extension
      */
     public static Document parseXMLDocument(String pathToFile) throws ParserConfigurationException,
-            SAXException, IOException
+            SAXException, IOException, WrongDocumentExtensionException
     {
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
         Path documentPath = Paths.get(pathToFile).toAbsolutePath();
+        
+        if(!documentPath.toString().toLowerCase().trim().endsWith(".xml"))
+        {
+            throw new WrongDocumentExtensionException(NOT_XML_EXTENSION_MESSAGE);
+        }
 
         Document xmlDocument = documentBuilder.parse(new File(documentPath.toString()));
 
