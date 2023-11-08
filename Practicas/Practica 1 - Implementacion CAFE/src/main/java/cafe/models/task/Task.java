@@ -15,9 +15,25 @@ public abstract class Task
     private final long id;  
     private List<Slot> inputSlots;
     private List<Slot> outputSlots;
+    
+    private static final String EMPTY_INPUT_SLOTS_EXCEPTION_MESSAGE = "The task's input "
+            + "slots must not be empty";
 
+    private static final String EMPTY_OUTPUT_SLOTS_EXCEPTION_MESSAGE = "The task's input "
+            + "slots must not be empty";
+    
     public Task(List<Slot> inputSlots, List<Slot> outputSlots)
     {
+        if(inputSlots == null || inputSlots.isEmpty())
+        {
+            throw new IllegalArgumentException(EMPTY_INPUT_SLOTS_EXCEPTION_MESSAGE);
+        }
+        
+        if(outputSlots == null || outputSlots.isEmpty())
+        {
+            throw new IllegalArgumentException(EMPTY_OUTPUT_SLOTS_EXCEPTION_MESSAGE);
+        }
+        
         Sequence taskSequence = TaskSequence.getTaskSequenceInstance();
         this.id = taskSequence.getNextIdentifier();
         this.inputSlots = inputSlots;
