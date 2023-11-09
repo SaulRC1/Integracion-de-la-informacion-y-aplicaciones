@@ -11,12 +11,27 @@ import java.util.List;
  */
 public class SplitterTask extends Task
 {
-
-    public SplitterTask(List<Slot> inputSlots, List<Slot> outputSlots)
+    private String xPathExpression;
+    
+    public static final String SPLITTER_METADATA_OPEN_TAG = "<splitterID>";
+    public static final String SPLITTER_METADATA_CLOSE_TAG = "<\\splitterID>";
+    
+    public SplitterTask(Slot inputSlot, Slot outputSlot, String xPathExpression)
     {
-        super(inputSlots, outputSlots);
+        super(List.of(inputSlot), List.of(outputSlot));
+        this.xPathExpression = xPathExpression;
     }
 
+    public String getxPathExpression()
+    {
+        return xPathExpression;
+    }
+
+    public void setxPathExpression(String xPathExpression)
+    {
+        this.xPathExpression = xPathExpression;
+    }
+    
     @Override
     public void doTask()
     {

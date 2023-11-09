@@ -3,6 +3,7 @@ package cafe.models.task.routing;
 import cafe.models.message.Message;
 import cafe.models.task.Task;
 import cafe.models.slot.Slot;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,14 +24,23 @@ public class ReplicatorTask extends Task
     @Override
     public void doTask()
     {
-        List<Slot> inputSlots = getInputSlots();
+        Slot inputSlot = getInputSlots().get(0);
         List<Slot> outPutSlots = getOutputSlots();
-        for (int i = 0; i < inputSlots.size(); i++)
+        List<Message> inputMessages = new ArrayList<>();
+        
+        int inputSlotBufferSize = inputSlot.getSlotBufferSize();
+        
+        for (int i = 0; i < inputSlotBufferSize; i++)
         {
-            Message message = inputSlots.get(i).read();
-            for (int j = 0; j < outPutSlots.size(); j++)
+            inputMessages.add(inputSlot.read());
+        }
+
+        for (Slot outPutSlot : outPutSlots)
+        {
+            /*Clonado de mensajes*/           
+            for (Message message : inputMessages)
             {
-                outPutSlots.get(j).write(message);
+                outPutSlot.write(message);
             }
         }
     }

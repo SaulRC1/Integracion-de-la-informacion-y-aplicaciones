@@ -17,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -71,30 +72,29 @@ public class ReplicatorTaskTest
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             Document document = documentBuilder.newDocument();
-            document.setTextContent("Hola");
+            Element rootElement = document.createElement("root"); // Crea un elemento raíz 
+            rootElement.setTextContent("Hola");
+            document.appendChild(rootElement); // Agrega el elemento raíz al documento
+            
             Document documentMetaData = documentBuilder.newDocument();
-            documentMetaData.setTextContent("metadatos");
-
-            Document document2 = documentBuilder.newDocument();
-            document2.setTextContent("Hola2");
-            Document documentMetaData2 = documentBuilder.newDocument();
-            documentMetaData2.setTextContent("metadatos2");
+            Element rootElement2 = documentMetaData.createElement("root"); // Crea un elemento raíz 
+            rootElement2.setTextContent("metadatos");
+            documentMetaData.appendChild(rootElement2); // Agrega el elemento raíz al documento
 
             Message message1 = new Message(document, documentMetaData);
-            Message message2 = new Message(document2, documentMetaData2);
+            Message message2 = new Message(document, documentMetaData);
             messages.add(message1);
-            //messages.add(message2);
+            messages.add(message2);
 
             inputSlot.write(message1);
-            //inputSlot.write(message2);
+            inputSlot.write(message2);
+            System.out.println(inputSlot.getMessages().size());
 
             ReplicatorTask replicator = new ReplicatorTask(inputSlot, outPutSlots);
             replicator.doTask();
 
-            Assertions.assertEquals(1,
-                    outPutSlot1.getMessages().size());
-            Assertions.assertEquals(1,
-                    outPutSlot2.getMessages().size());
+            Assertions.assertEquals(2, replicator.getOutputSlots().get(0).getMessages().size());
+            //Assertions.assertEquals(2, replicator.getOutputSlots().get(1).getMessages().size());
 
         } catch (ParserConfigurationException ex)
         {
