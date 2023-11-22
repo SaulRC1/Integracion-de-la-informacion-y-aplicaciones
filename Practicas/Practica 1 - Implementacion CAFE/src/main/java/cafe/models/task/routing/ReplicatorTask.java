@@ -5,6 +5,8 @@ import cafe.models.task.Task;
 import cafe.models.slot.Slot;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,9 +29,9 @@ public class ReplicatorTask extends Task
         Slot inputSlot = getInputSlots().get(0);
         List<Slot> outPutSlots = getOutputSlots();
         List<Message> inputMessages = new ArrayList<>();
-        
+
         int inputSlotBufferSize = inputSlot.getSlotBufferSize();
-        
+
         for (int i = 0; i < inputSlotBufferSize; i++)
         {
             inputMessages.add(inputSlot.read());
@@ -37,10 +39,16 @@ public class ReplicatorTask extends Task
 
         for (Slot outPutSlot : outPutSlots)
         {
-            /*Clonado de mensajes*/           
             for (Message message : inputMessages)
             {
-                outPutSlot.write(message);
+                try
+                {
+                    Message clonedMessage = (Message) message.clone();
+                    outPutSlot.write(clonedMessage);
+                } catch (CloneNotSupportedException ex)
+                {
+                    Logger.getLogger(ReplicatorTask.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+                }
             }
         }
     }

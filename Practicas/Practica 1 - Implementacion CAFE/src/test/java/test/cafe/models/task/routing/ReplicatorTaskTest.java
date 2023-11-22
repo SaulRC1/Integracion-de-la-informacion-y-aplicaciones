@@ -25,7 +25,6 @@ import org.w3c.dom.Element;
  */
 public class ReplicatorTaskTest
 {
-
     public ReplicatorTaskTest()
     {
     }
@@ -88,13 +87,12 @@ public class ReplicatorTaskTest
 
             inputSlot.write(message1);
             inputSlot.write(message2);
-            System.out.println(inputSlot.getMessages().size());
 
             ReplicatorTask replicator = new ReplicatorTask(inputSlot, outPutSlots);
             replicator.doTask();
 
             Assertions.assertEquals(2, replicator.getOutputSlots().get(0).getMessages().size());
-            //Assertions.assertEquals(2, replicator.getOutputSlots().get(1).getMessages().size());
+            Assertions.assertEquals(2, replicator.getOutputSlots().get(1).getMessages().size());
 
         } catch (ParserConfigurationException ex)
         {
