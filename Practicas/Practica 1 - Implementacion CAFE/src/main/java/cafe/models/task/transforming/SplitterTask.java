@@ -47,6 +47,6 @@ public class SplitterTask extends Task
                         inputMessages.get(i).getDocumentMetaData());
                 outputSlot.write(message);
             }
-        }
+        }      
     }
 }

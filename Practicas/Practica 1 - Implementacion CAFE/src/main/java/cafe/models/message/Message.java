@@ -96,12 +96,15 @@ public class Message implements Cloneable
      *
      * @return @throws CloneNotSupportedException
      */
-    @Override
     public Object clone() throws CloneNotSupportedException
     {
-        Document clonedDocument = cloneDocument(this.document);
-        Document clonedDocumentMetaData = cloneDocument(this.documentMetaData);
-        return new Message(clonedDocument, clonedDocumentMetaData);
+        //Document clonedDocument = cloneDocument(this.document);
+        //Document clonedDocumentMetaData = cloneDocument(this.documentMetaData);
+        //return new Message(clonedDocument, clonedDocumentMetaData);
+        Message clonedMessage = (Message) super.clone();
+        clonedMessage.document = (Document) this.document.cloneNode(true);
+        clonedMessage.documentMetaData = (Document) this.documentMetaData.cloneNode(true);
+        return clonedMessage;
     }
 
     private Document cloneDocument(Document originalDocument)
@@ -109,7 +112,7 @@ public class Message implements Cloneable
         try
         {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            
+
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document clonedDocument = builder.newDocument();
             Node originalRoot = originalDocument.getDocumentElement();
@@ -123,8 +126,8 @@ public class Message implements Cloneable
         {
             Logger.getLogger(Message.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             return null;
-        }       
-    }   
+        }
+    }
 
     private void cloneNodes(Node originalNode, Node clonedNode)
     {
@@ -134,7 +137,7 @@ public class Message implements Cloneable
             Node originalChild = children.item(i);
             Node clonedChild = clonedNode.getOwnerDocument().importNode(originalChild, true);
             clonedNode.appendChild(clonedChild);
-            cloneNodes(originalChild, clonedChild);
+            cloneNodes(originalChild, clonedChild); // Clonar también los hijos recursivamente
         }
 
         NamedNodeMap attributes = originalNode.getAttributes();

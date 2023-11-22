@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -19,6 +20,7 @@ import org.xmlunit.diff.Diff;
  */
 public class MessageTest
 {
+
     @Test
     public void testCloneMessage()
     {
@@ -27,13 +29,27 @@ public class MessageTest
             // Crear un documento original para el mensaje
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
+
             Document originalDocument = builder.newDocument();
-            Element rootElement = originalDocument.createElement("root");
+            Element rootElement = originalDocument.createElement("cafe_order");
             originalDocument.appendChild(rootElement);
 
-            // Crear un documento original para los metadatos del mensaje
             Document documentMetaData = builder.newDocument();
             Element metaRootElement = documentMetaData.createElement("metadata");
+
+            // Crear el elemento <splitterID>
+            Element splitterIDElement = documentMetaData.createElement("splitterID");
+
+            // Crear el contenido dentro de <splitterID>
+            Text splitterIDText = documentMetaData.createTextNode("1");
+
+            // Adjuntar el contenido al elemento <splitterID>
+            splitterIDElement.appendChild(splitterIDText);
+
+            // Adjuntar el elemento <splitterID> a <metadata>
+            metaRootElement.appendChild(splitterIDElement);
+            
+            // Adjuntar <metadata> al documento de metadatos
             documentMetaData.appendChild(metaRootElement);
 
             // Crear un mensaje original
