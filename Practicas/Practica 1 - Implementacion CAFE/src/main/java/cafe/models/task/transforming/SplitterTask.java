@@ -14,6 +14,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -54,6 +55,7 @@ public class SplitterTask extends Task
         Slot outputSlot = getOutputSlots().get(0);
 
         List<Message> inputMessages = inputSlot.getMessages();
+
         if (inputMessages != null)
         {
             for (int i = 0; i < inputMessages.size(); i++)
@@ -75,26 +77,28 @@ public class SplitterTask extends Task
                     // Evaluar la expresión XPath para obtener un NodeList de nodos que cumplen con la expresión
                     NodeList nodeList = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 
-                    // Crear un nuevo documento para cada nodo en el NodeList y agregarlo al outputSlot
+                    // Iterar sobre los nodos seleccionados y agregar la etiqueta al DocumentMetaData
                     for (int j = 0; j < nodeList.getLength(); j++)
                     {
-                        Document newDocument = createNewDocument(nodeList.item(j));
+                        Node selectedNode = nodeList.item(j);
 
-                        // Agregar metadata del splitterID al documento
-                        Element rootElement = newDocument.getDocumentElement();
-                        Element splitterIDElement = newDocument.createElement(SPLITTER_METADATA_OPEN_TAG);
-                        splitterIDElement.appendChild(newDocument.createTextNode(Integer.toString(splitterCounter)));
-                        rootElement.appendChild(splitterIDElement);
+                        // Obtener el DocumentMetaData actual
+                        Document metaData = inputMessage.getDocumentMetaData();
 
-                        // Crear un nuevo mensaje con el documento y metadata del mensaje original
-                        Message outputMessage = new Message(newDocument, inputMessage.getDocumentMetaData());
+                        // Crear la etiqueta <splitterID>1</splitterID>
+                        Element splitterIDElement = metaData.createElement(SPLITTER_METADATA_OPEN_TAG);
+                        splitterIDElement.appendChild(metaData.createTextNode("1"));
 
-                        // Escribir el nuevo mensaje en el outputSlot
-                        outputSlot.write(outputMessage);
+                        // Agregar la etiqueta al DocumentMetaData
+                        metaData.getDocumentElement().appendChild(splitterIDElement);
                     }
-                } catch (Exception e)
+
+                    // Escribir el mensaje actualizado en el outputSlot
+                    outputSlot.write(inputMessage);
+
+                } catch (XPathExpressionException | DOMException ex)
                 {
-                    e.printStackTrace();
+                    Logger.getLogger(SplitterTask.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
                 }
             }
         }
@@ -102,18 +106,21 @@ public class SplitterTask extends Task
 
     private Document createNewDocument(org.w3c.dom.Node node)
     {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder;
         try
         {
-            builder = factory.newDocumentBuilder();
+            // Crear un nuevo documento
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
             Document newDocument = builder.newDocument();
+
+            // Clonar los nodos del documento original y agregarlos al nuevo documento
             Node importedNode = newDocument.importNode(node, true);
             newDocument.appendChild(importedNode);
+
             return newDocument;
-        } catch (ParserConfigurationException e)
+        } catch (ParserConfigurationException | DOMException ex)
         {
-            e.printStackTrace();
+            Logger.getLogger(SplitterTask.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             return null;
         }
     }
