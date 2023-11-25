@@ -8,17 +8,20 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
  *
  * @author Saúl Rodríguez Naranjo
  */
-public class XMLDocumentParser 
+public class XMLDocumentParser
 {
+
     private static final DocumentBuilderFactory documentBuilderFactory
             = DocumentBuilderFactory.newInstance();
-    
+
     private static final String NOT_XML_EXTENSION_MESSAGE = "The file does not"
             + "have .xml extension.";
 
@@ -27,16 +30,16 @@ public class XMLDocumentParser
      *
      * @param pathToFile The path to the desired file, preferably an absolute
      * path.
-     * 
+     *
      * @return The parsed XML Document
-     * 
+     *
      * @throws ParserConfigurationException if a DocumentBuilder cannot be
      * created which satisfies the configuration requested.
-     * 
+     *
      * @throws SAXException If any parse error occurs.
-     * 
+     *
      * @throws IOException If any IO exception occurs.
-     * 
+     *
      * @throws cafe.xml.WrongDocumentExtensionException When the file does not
      * have .xml extension
      */
@@ -46,8 +49,8 @@ public class XMLDocumentParser
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
         Path documentPath = Paths.get(pathToFile).toAbsolutePath();
-        
-        if(!documentPath.toString().toLowerCase().trim().endsWith(".xml"))
+
+        if (!documentPath.toString().toLowerCase().trim().endsWith(".xml"))
         {
             throw new WrongDocumentExtensionException(NOT_XML_EXTENSION_MESSAGE);
         }
@@ -57,5 +60,21 @@ public class XMLDocumentParser
         xmlDocument.getDocumentElement().normalize();
 
         return xmlDocument;
+    }
+
+    public static void printDocument(Node node)
+    {
+        System.out.println(node.getNodeName());
+
+        NodeList nodeList = node.getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++)
+        {
+            Node currentNode = nodeList.item(i);
+            if (currentNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+                //calls this method for all the children which is Element
+                printDocument(currentNode);
+            }
+        }
     }
 }

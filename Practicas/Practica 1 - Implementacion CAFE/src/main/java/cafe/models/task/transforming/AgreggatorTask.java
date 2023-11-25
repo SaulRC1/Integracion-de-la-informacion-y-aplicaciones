@@ -3,7 +3,16 @@ package cafe.models.task.transforming;
 import cafe.models.message.Message;
 import cafe.models.task.Task;
 import cafe.models.slot.Slot;
+import cafe.xml.XPathParser;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 
 /**
  *
@@ -45,16 +54,38 @@ public class AgreggatorTask extends Task
     public void doTask()
     {
         //First get from how many splitters our messages come from
-        int numberOfSplitters = getNumberOfSplitters(inputSlot.getMessages());
+        Set<Long> allSplitters = getNumberOfSplitters(inputSlot.getMessages());
         
-        for (int i = 0; i < numberOfSplitters; i++)
+        /*for (int i = 0; i < numberOfSplitters; i++)
         {
             
-        }
+        }*/
     }
 
-    private int getNumberOfSplitters(List<Message> messages)
+    private Set<Long> getNumberOfSplitters(List<Message> messages)
     {
-        return 0;
+        Set<Long> splittersIds = new HashSet<>();
+        
+        for (Message message : messages)
+        {
+            Document messageMetadata = message.getDocumentMetaData();
+            
+            XPathParser xpathParser = new XPathParser();
+            
+            try
+            {
+                Node splitterIdNode = (Node) xpathParser.executeXPathExpression(
+                        "/metadata/splitterId", messageMetadata, 
+                        XPathConstants.NODE);
+                
+                //splitterIdNode.get
+                
+                //splittersIds.add()
+                        
+            } catch (XPathExpressionException ex)
+            {
+                Logger.getLogger(AgreggatorTask.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }
+        }
     }
 }
