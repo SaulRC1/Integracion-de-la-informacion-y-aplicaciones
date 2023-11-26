@@ -87,5 +87,6 @@ public class AgreggatorTask extends Task
                 Logger.getLogger(AgreggatorTask.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
+        return null;
     }
 }
