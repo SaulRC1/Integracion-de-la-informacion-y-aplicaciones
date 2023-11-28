@@ -73,7 +73,7 @@ public class SplitterTask extends Task
                 Document documentBody = documentBuilder.newDocument();
 
                 // Crear la etiqueta <splitterID> y agregarla a metadataRoot
-                Element splitterIDElement = metadataDocument.createElement("splitterID");
+                Element splitterIDElement = metadataDocument.createElement(SPLITTER_METADATA_TAG);
                 splitterIDElement.appendChild(metadataDocument.createTextNode(String.valueOf(splitterCounter)));
 
                 Element metadataRoot = metadataDocument.getDocumentElement();
@@ -83,7 +83,9 @@ public class SplitterTask extends Task
                 for (int j = 0; j < nodeList.getLength(); j++)
                 {
                     Node selectedNode = nodeList.item(j);
-                    Node importedNode = documentBody.importNode(selectedNode, true);
+                    //Node importedNode = documentBody.importNode(selectedNode, true);
+                    Node importedClone = selectedNode.cloneNode(true);
+                    Node importedNode = documentBody.importNode(importedClone, true);
                     documentBody.appendChild(importedNode);
 
                     Message outputMessage = new Message(documentBody, metadataDocument);
