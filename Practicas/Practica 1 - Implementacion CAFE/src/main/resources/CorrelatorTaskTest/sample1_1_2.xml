@@ -5,9 +5,5 @@
             <name>cafe</name>
             <type>hot</type>
         </drink>
-        <drink>
-            <name>coca-cola</name>
-            <type>cold</type>
-        </drink>
     </drinks>
 </cafe_order>

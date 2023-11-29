@@ -74,6 +74,14 @@ public class XMLDocumentParser
             {
                 //calls this method for all the children which is Element
                 printDocument(currentNode);
+            } else if (currentNode.getNodeType() == Node.TEXT_NODE)
+            {
+                // Print the text content of the node (if any)
+                String textContent = currentNode.getTextContent().trim();
+                if (!textContent.isEmpty())
+                {
+                    System.out.println("  Text Content: " + textContent);
+                }
             }
         }
     }
