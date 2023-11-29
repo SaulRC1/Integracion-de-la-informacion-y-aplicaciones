@@ -69,8 +69,7 @@ public class SplitterTask extends Task
                 NodeList nodeList = (NodeList) result;
 
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-                Document documentBody = documentBuilder.newDocument();
+                DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();              
 
                 // Crear la etiqueta <splitterID> y agregarla a metadataRoot
                 Element splitterIDElement = metadataDocument.createElement(SPLITTER_METADATA_TAG);
@@ -82,10 +81,9 @@ public class SplitterTask extends Task
                 // Iterar sobre los nodos seleccionados
                 for (int j = 0; j < nodeList.getLength(); j++)
                 {
+                    Document documentBody = documentBuilder.newDocument();
                     Node selectedNode = nodeList.item(j);
-                    //Node importedNode = documentBody.importNode(selectedNode, true);
-                    Node importedClone = selectedNode.cloneNode(true);
-                    Node importedNode = documentBody.importNode(importedClone, true);
+                    Node importedNode = documentBody.importNode(selectedNode, true);
                     documentBody.appendChild(importedNode);
 
                     Message outputMessage = new Message(documentBody, metadataDocument);

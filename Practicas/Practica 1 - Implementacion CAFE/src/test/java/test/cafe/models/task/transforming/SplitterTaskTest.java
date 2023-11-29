@@ -47,7 +47,7 @@ public class SplitterTaskTest
 
             // Verificar el resultado
             List<Message> outputMessages = outputSlot.getMessages();
-            assertEquals(2, outputMessages.size()); 
+            assertEquals(4, outputMessages.size()); 
             int i = 0;
             for (Message outputMessage : outputMessages)
             {            
