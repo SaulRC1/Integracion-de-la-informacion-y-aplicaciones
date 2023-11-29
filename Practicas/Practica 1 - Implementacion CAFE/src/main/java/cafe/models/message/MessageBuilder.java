@@ -55,4 +55,27 @@ public class MessageBuilder
     {
         return null;
     }
+    
+    public Message buildEmptyMessage()
+    {
+        try
+        {
+            DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+            
+            Document documentMetadata = docBuilder.newDocument();
+            
+            Element rootElement = documentMetadata.createElement("metadata");
+            documentMetadata.appendChild(rootElement);
+            
+            Document messageBody = docBuilder.newDocument();
+            
+            return new Message(messageBody, documentMetadata);
+            
+        } catch (ParserConfigurationException ex)
+        {
+            Logger.getLogger(MessageBuilder.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+        }
+        
+        return null;
+    }
 }
