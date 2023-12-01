@@ -17,9 +17,9 @@ public class Message implements Cloneable
             = "The document metadata must not be null";
 
     /**
-     *
-     * @param document
-     * @param documentMetaData
+     * Will build a message
+     * @param document the document body of the message
+     * @param documentMetaData the document metadata of the message
      */
     public Message(Document document, Document documentMetaData)
     {
@@ -38,8 +38,8 @@ public class Message implements Cloneable
     }
 
     /**
-     *
-     * @return
+     * Will get the document body
+     * @return the document body
      */
     public Document getDocument()
     {
@@ -47,8 +47,8 @@ public class Message implements Cloneable
     }
 
     /**
-     *
-     * @param document
+     * Will set the document body with the document on the parameter
+     * @param document The document body that we want
      */
     public void setDocument(Document document)
     {
@@ -61,8 +61,8 @@ public class Message implements Cloneable
     }
 
     /**
-     *
-     * @return
+     * Will get the document metadata
+     * @return the document metada
      */
     public Document getDocumentMetaData()
     {
@@ -70,8 +70,8 @@ public class Message implements Cloneable
     }
 
     /**
-     *
-     * @param documentMetaData
+     * Will set the document metadata with the document on the parameter
+     * @param documentMetaData The document metadata that we want
      */
     public void setDocumentMetaData(Document documentMetaData)
     {
@@ -84,8 +84,9 @@ public class Message implements Cloneable
     }
 
     /**
-     *
-     * @return @throws CloneNotSupportedException
+     * Will clone the message
+     * @return the cloned message
+     * @throws CloneNotSupportedException
      */
     @Override
     public Object clone() throws CloneNotSupportedException

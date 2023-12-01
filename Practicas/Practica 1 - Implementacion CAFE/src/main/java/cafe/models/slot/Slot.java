@@ -8,7 +8,7 @@ import java.util.List;
  * A Slot acts as a message buffer for communication between tasks or between a 
  * task and a {@link Port}
  * 
- * @author Juan Alberto Dominguez Vazquez
+ * @author Saul Rodriguez Naranjo
  */
 public class Slot
 {

@@ -28,6 +28,12 @@ public class SplitterTask extends Task
     private int splitterCounter = 0;
     public static final String SPLITTER_METADATA_TAG = "splitterID";
 
+    /**
+     * Will build a splitter
+     * @param inputSlot Numbers of input slots that the task in going to have
+     * @param outputSlot Numbers of output slots that the task in going to have
+     * @param xPathExpression The xPath expression needed to know for what part split the message
+     */
     public SplitterTask(Slot inputSlot, Slot outputSlot, String xPathExpression)
     {
         super(List.of(inputSlot), List.of(outputSlot));
@@ -35,16 +41,30 @@ public class SplitterTask extends Task
         this.splitterCounter++;
     }
 
+    /**
+     * Will get the xPath expression
+     * @return The xPath expression
+     */
     public String getxPathExpression()
     {
         return xPathExpression;
     }
 
+    /**
+     * Will set the xPath expression that you desire
+     * @param xPathExpression the xPath expression that we want
+     */
     public void setxPathExpression(String xPathExpression)
     {
         this.xPathExpression = xPathExpression;
     }
 
+    /**
+     * <p>
+     * This method will divide the messages from the input slot 
+     * by where the xpath expression says and will write them to the output output.
+     * </p>
+     */
     @Override
     public void doTask()
     {

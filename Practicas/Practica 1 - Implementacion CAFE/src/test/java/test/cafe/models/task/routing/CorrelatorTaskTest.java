@@ -6,12 +6,15 @@ import cafe.models.slot.Slot;
 import cafe.models.task.routing.CorrelatorTask;
 import cafe.xml.WrongDocumentExtensionException;
 import cafe.xml.XMLDocumentParser;
+import cafe.xml.XPathParser;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
@@ -56,6 +59,8 @@ public class CorrelatorTaskTest
             orderIdElement.appendChild(message.getDocumentMetaData().createTextNode("1"));
             message.getDocumentMetaData().getDocumentElement().appendChild(orderIdElement);
             
+            String orderId = extractOrderId(message.getDocumentMetaData());
+            
             Message message2 = new Message(sample2_1, sample1_1);
             /*Element orderIdElement2 = message2.getDocumentMetaData().createElement("order_id");
             orderIdElement2.appendChild(message2.getDocumentMetaData().createTextNode("1"));
@@ -81,7 +86,7 @@ public class CorrelatorTaskTest
             inputSlot2.write(message3);
             inputSlot2.write(message4);
 
-            CorrelatorTask correlator = new CorrelatorTask(inputSlots, outputSlots);
+            CorrelatorTask correlator = new CorrelatorTask(inputSlots, outputSlots, "/metadata/order_id/text()");
             correlator.doTask();
 
             int i = 0;
@@ -115,9 +120,17 @@ public class CorrelatorTaskTest
                     XMLDocumentParser.printDocument(messageBody.getDocumentElement());
                 }
             }
-        } catch (ParserConfigurationException | SAXException | IOException | WrongDocumentExtensionException ex)
+        } catch (ParserConfigurationException | SAXException | IOException | WrongDocumentExtensionException | XPathExpressionException ex)
         {
             Logger.getLogger(CorrelatorTaskTest.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private String extractOrderId(Document documentMetaData) throws XPathExpressionException
+    {
+        // Aquí asumo que el order_id es un elemento directo del documentMetaData
+        String xPathExpression = "/metadata/order_id/text()";
+        XPathParser xpath = new XPathParser();
+        return (String) xpath.executeXPathExpression(xPathExpression, documentMetaData, XPathConstants.STRING);
     }
 }

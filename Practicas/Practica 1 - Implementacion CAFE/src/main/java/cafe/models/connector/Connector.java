@@ -5,7 +5,7 @@ import cafe.services.Application;
 
 /**
  *
- * @author juald
+ * @author Juan Alberto Dominguez Vazquez
  */
 public abstract class Connector
 {

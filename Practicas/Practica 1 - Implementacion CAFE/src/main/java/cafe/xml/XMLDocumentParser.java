@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
  */
 public class XMLDocumentParser
 {
-
     private static final DocumentBuilderFactory documentBuilderFactory
             = DocumentBuilderFactory.newInstance();
 
@@ -62,6 +61,10 @@ public class XMLDocumentParser
         return xmlDocument;
     }
 
+    /**
+     * Will print the document tag and content of the node of a document
+     * @param node the node that we want to print
+     */
     public static void printDocument(Node node)
     {
         System.out.println(node.getNodeName());
