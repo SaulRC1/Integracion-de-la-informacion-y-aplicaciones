@@ -62,13 +62,6 @@ public class AggregatorTask extends Task
     {
         //First get from how many splitters our messages come from
         Set<Long> allSplitters = getNumberOfSplitters(inputSlot.getMessages());
-
-        Iterator<Long> allSplittersIterator = allSplitters.iterator();
-
-        while (allSplittersIterator.hasNext())
-        {
-            System.out.println("SplitterId from Aggregator: " + allSplittersIterator.next());
-        }
         
         Map<Long, List<Message>> messagesFromSplitterMap = createMessagesFromSplitterMap(allSplitters);
 
@@ -212,6 +205,14 @@ public class AggregatorTask extends Task
             
             Document aggregatedMessageBody = aggregatedMessage.getDocument();
             
+            String rootTagNameFromSplitterMessages = messages.get(0).getDocument()
+                    .getDocumentElement().getTagName();
+            
+            String aggregatedMessageBodyRootTagName = rootTagNameFromSplitterMessages + "s";
+            
+            Node aggregatedMessageBodyRootElement = aggregatedMessageBody.createElement(aggregatedMessageBodyRootTagName);
+            aggregatedMessageBody.appendChild(aggregatedMessageBodyRootElement);
+            
             for (Message message : messages)
             {
                 Document messageBody = message.getDocument();
@@ -224,7 +225,7 @@ public class AggregatorTask extends Task
                     Node childNode = messageBodyChildNodes.item(i);
                     
                     Node importedChildNode = aggregatedMessageBody.importNode(childNode, true);
-                    aggregatedMessageBody.appendChild(importedChildNode);
+                    aggregatedMessageBody.getDocumentElement().appendChild(importedChildNode);
                 }
             }
             

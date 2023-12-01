@@ -17,6 +17,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -102,6 +103,17 @@ public class AggregatorTaskTest
             
             aggregatorTask.doTask();
             
+            outputSlot = aggregatorTask.getOutputSlots().get(0);
+            
+            List<Message> outputMessages = outputSlot.getMessages();
+            
+            for (Message outputMessage : outputMessages)
+            {
+                XMLDocumentParser.printDocument(outputMessage.getDocument().getDocumentElement());
+            }
+            
+            Assertions.assertEquals(1, outputSlot.getSlotBufferSize());
+            
         } catch (ParserConfigurationException | SAXException | IOException | WrongDocumentExtensionException ex)
         {
             Logger.getLogger(AggregatorTaskTest.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,6 +183,17 @@ public class AggregatorTaskTest
             inputSlot.write(msg6);
             
             aggregatorTask.doTask();
+            
+            outputSlot = aggregatorTask.getOutputSlots().get(0);
+            
+            List<Message> outputMessages = outputSlot.getMessages();
+            
+            for (Message outputMessage : outputMessages)
+            {
+                XMLDocumentParser.printDocument(outputMessage.getDocument().getDocumentElement());
+            }
+            
+            Assertions.assertEquals(2, outputSlot.getSlotBufferSize());
             
         } catch (ParserConfigurationException | SAXException | IOException | WrongDocumentExtensionException ex)
         {
