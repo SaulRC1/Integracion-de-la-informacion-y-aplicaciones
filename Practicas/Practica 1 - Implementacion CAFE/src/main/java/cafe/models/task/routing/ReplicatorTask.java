@@ -14,14 +14,21 @@ import java.util.logging.Logger;
  */
 public class ReplicatorTask extends Task
 {
-
+    /**
+     * Will build a Replicator
+     * @param inputSlot Numbers of input slots that the task in going to have
+     * @param outputSlots Numbers of output slots that the task in going to have
+     */
     public ReplicatorTask(Slot inputSlot, List<Slot> outputSlots)
     {
         super(List.of(inputSlot), outputSlots);
     }
 
     /**
-     *
+     * <p>
+     * This method will replicate the messages stored in the input slot and then
+     * put it all on each outputs slots.
+     * </p>
      */
     @Override
     public void doTask()

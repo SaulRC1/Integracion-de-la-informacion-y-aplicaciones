@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  *
- * @author Juan Alberto Dominguez Vazquez
+ * @author Saul Rodriguez Naranjo
  */
 public class DistributorTask extends Task
 {

@@ -5,7 +5,7 @@ import cafe.models.slot.Slot;
 
 /**
  *
- * @author Juan Alberto Dominguez Vazquez
+ * @author Saul Rodriguez Naranjo
  */
 public class EntryPort extends Port
 {

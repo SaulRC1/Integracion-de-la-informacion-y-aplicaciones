@@ -22,7 +22,7 @@ import org.w3c.dom.NodeList;
 
 /**
  *
- * @author Juan Alberto Dominguez Vazquez
+ * @author Saul Rodriguez Naranjo
  */
 public class AggregatorTask extends Task
 {

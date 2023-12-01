@@ -23,11 +23,11 @@ public class ContextEnricherTask extends Task
     private String xPathExpression;
 
     /**
-     *
-     * @param inputSlot
-     * @param outputSlot
-     * @param contextSlot
-     * @param xPathExpression
+     * Will build a context enricher
+     * @param inputSlot Numbers of input slots that the task in going to have
+     * @param outputSlot Numbers of output slots that the task in going to have
+     * @param contextSlot The slot where the task in going to take the context to add
+     * @param xPathExpression The xPath expression needed to know where is going to place the context message
      */
     public ContextEnricherTask(Slot inputSlot, Slot outputSlot, Slot contextSlot, String xPathExpression)
     {
@@ -35,18 +35,29 @@ public class ContextEnricherTask extends Task
         this.xPathExpression = xPathExpression;
     }
 
+    /**
+     * Will get the xPath expression
+     * @return The xPath expression
+     */
     public String getxPathExpression()
     {
         return xPathExpression;
     }
 
+    /**
+     * Will set the xPath expression that you desire
+     * @param xPathExpression the xPath expression that we want
+     */
     public void setxPathExpression(String xPathExpression)
     {
         this.xPathExpression = xPathExpression;
     }
 
     /**
-     *
+     * <p>
+     * This method will add the message located in the context slot and add it
+     * to the messages in the input slot where the xPath expression say
+     * </p>
      */
     @Override
     public void doTask()

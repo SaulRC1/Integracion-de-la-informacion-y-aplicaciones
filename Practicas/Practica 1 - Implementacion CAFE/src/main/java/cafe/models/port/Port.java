@@ -5,7 +5,7 @@ import cafe.sequence.Sequence;
 
 /**
  *
- * @author Juan Alberto Dominguez Vazquez
+ * @author Saul Rodriguez Naranjo
  */
 public abstract class Port
 {
