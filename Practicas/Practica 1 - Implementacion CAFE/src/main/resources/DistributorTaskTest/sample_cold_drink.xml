@@ -1,6 +1,7 @@
-<cafe_order>
-    <number>1</number>
-</cafe_order>
+<drink>
+    <name>guarana</name>
+    <type>cold</type>
+</drink>
 
 
 
