@@ -19,7 +19,7 @@ public abstract class Task
     private static final String EMPTY_INPUT_SLOTS_EXCEPTION_MESSAGE = "The task's input "
             + "slots must not be empty";
 
-    private static final String EMPTY_OUTPUT_SLOTS_EXCEPTION_MESSAGE = "The task's input "
+    private static final String EMPTY_OUTPUT_SLOTS_EXCEPTION_MESSAGE = "The task's output "
             + "slots must not be empty";
     
     public Task(List<Slot> inputSlots, List<Slot> outputSlots)
