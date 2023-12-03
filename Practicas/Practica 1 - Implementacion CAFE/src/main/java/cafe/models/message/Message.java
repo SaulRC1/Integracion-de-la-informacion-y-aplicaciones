@@ -3,7 +3,13 @@ package cafe.models.message;
 import org.w3c.dom.Document;
 
 /**
- *
+ * The messages to be sent throughout the CAFE application.
+ * 
+ * <p>
+ * These messages consist of a metadata where information outside the main 
+ * content will be placed, and a body, where the main content resides.
+ * </p>
+ * 
  * @author Juan Alberto Dominguez Vazquez
  */
 public class Message implements Cloneable
