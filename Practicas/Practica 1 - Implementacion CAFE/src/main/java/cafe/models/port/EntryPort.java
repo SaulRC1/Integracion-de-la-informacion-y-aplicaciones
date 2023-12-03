@@ -9,7 +9,6 @@ import cafe.models.slot.Slot;
  */
 public class EntryPort extends Port
 {
-
     private final Slot slot;
 
     public EntryPort(Slot slot)
@@ -25,6 +24,5 @@ public class EntryPort extends Port
     public Slot getSlot()
     {
         return slot;
-    }
-    
+    }    
 }

@@ -13,9 +13,10 @@ public class EntryExitPort extends Port
     private Slot readSlot;
     private Slot writeSlot;
 
-    public EntryExitPort()
+    public EntryExitPort(Slot readSlot, Slot writeSlot)
     {
-
+        this.readSlot = readSlot;
+        this.writeSlot = writeSlot;
     }
 
     public void write(Message message)

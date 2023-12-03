@@ -12,9 +12,9 @@ public class ExitPort extends Port
 
     private Slot slot;
 
-    public ExitPort()
+    public ExitPort(Slot slot)
     {
-
+        this.slot = slot;
     }
 
     public Message read(Message message)
