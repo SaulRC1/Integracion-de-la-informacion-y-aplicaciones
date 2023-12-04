@@ -1,6 +1,8 @@
 package cafe.services;
 
+import cafe.models.message.Message;
 import cafe.models.message.MessageBuilder;
+import cafe.models.port.EntryExitPort;
 import cafe.services.barman.drinks.Drink;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,12 @@ public class HotDrinksBarman
 {
     private final List<Drink> hotDrinksStorage = new ArrayList<>();
     
-    public HotDrinksBarman()
+    private EntryExitPort entryExitPort;
+    
+    public HotDrinksBarman(EntryExitPort entryExitPort)
     {
+        this.entryExitPort = entryExitPort;
+        
         Drink cafe = new Drink("cafe", "hot", "Nescafé", "150ml",
                 "cup of coffee");
         hotDrinksStorage.add(cafe);
@@ -87,5 +93,30 @@ public class HotDrinksBarman
         }
         
         return drinkInformation;
+    }
+    
+    /**
+     * Performs this barman functionality, providing the information for every
+     * drink that is requested.
+     */
+    public void performFunctionality()
+    {        
+        Message msg;
+        
+        while((msg = entryExitPort.readFromInputSlot()) != null)
+        {
+            Document messageBody = msg.getDocument();
+            
+            Node drinkNameNode = messageBody.getElementsByTagName("name").item(0);
+            
+            String drinkName = drinkNameNode.getTextContent();
+            
+            Document drinkInformationMessageBody = formatDrinkInformation(drinkName);
+            
+            Message drinkInformationMessage = new Message(drinkInformationMessageBody, 
+                    msg.getDocumentMetaData());
+            
+            entryExitPort.writeIntoOutputSlot(drinkInformationMessage);
+        }
     }
 }

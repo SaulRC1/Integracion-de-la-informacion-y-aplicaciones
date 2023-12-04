@@ -4,6 +4,7 @@ import cafe.models.message.Message;
 import cafe.models.port.EntryExitPort;
 import cafe.models.slot.Slot;
 import cafe.services.ColdDrinksBarman;
+import cafe.services.HotDrinksBarman;
 import cafe.xml.WrongDocumentExtensionException;
 import cafe.xml.XMLDocumentParser;
 import java.io.IOException;
@@ -18,24 +19,8 @@ import org.xml.sax.SAXException;
  *
  * @author Saúl Rodríguez Naranjo
  */
-public class ColdDrinksBarmanTest
+public class HotDrinksBarmanTest 
 {
-
-    @Test
-    public void test_format_drink_information()
-    {
-        Slot outputSlot = new Slot();
-        Slot inputSlot = new Slot();
-
-        EntryExitPort entryExitPort = new EntryExitPort(outputSlot, inputSlot);
-
-        ColdDrinksBarman coldDrinksBarman = new ColdDrinksBarman(entryExitPort);
-
-        Document cocaColaDrinkInfo = coldDrinksBarman.formatDrinkInformation("coca-cola");
-
-        XMLDocumentParser.printDocument(cocaColaDrinkInfo.getDocumentElement());
-    }
-
     @Test
     public void test_functionality()
     {
@@ -46,24 +31,24 @@ public class ColdDrinksBarmanTest
 
             EntryExitPort entryExitPort = new EntryExitPort(outputSlot, inputSlot);
 
-            ColdDrinksBarman coldDrinksBarman = new ColdDrinksBarman(entryExitPort);
+            HotDrinksBarman hotDrinksBarman = new HotDrinksBarman(entryExitPort);
 
             Document messageMetadata = XMLDocumentParser.parseXMLDocument(
-                    "src/main/resources/DrinkBarmanTranslatorTest/message_metadata_cold_drink.xml");
+                    "src/main/resources/DrinkBarmanTranslatorTest/message_metadata.xml");
             Document messageBody = XMLDocumentParser.parseXMLDocument(
-                    "src/main/resources/DrinkBarmanTranslatorTest/message_body_cold_drink.xml");
+                    "src/main/resources/DrinkBarmanTranslatorTest/message_body.xml");
 
             Message msg = new Message(messageBody, messageMetadata);
             
             entryExitPort.writeIntoInputSlot(msg);
             
-            coldDrinksBarman.performFunctionality();
+            hotDrinksBarman.performFunctionality();
             
-            Message coldDrinksBarmanOutputMessage = entryExitPort.readFromOutputSlot();
+            Message hotDrinksBarmanOutputMessage = entryExitPort.readFromOutputSlot();
             
-            XMLDocumentParser.printDocument(coldDrinksBarmanOutputMessage.getDocument().getDocumentElement());
+            XMLDocumentParser.printDocument(hotDrinksBarmanOutputMessage.getDocument().getDocumentElement());
             
-            XMLDocumentParser.printDocument(coldDrinksBarmanOutputMessage.getDocumentMetaData().getDocumentElement());
+            XMLDocumentParser.printDocument(hotDrinksBarmanOutputMessage.getDocumentMetaData().getDocumentElement());
             
         } catch (ParserConfigurationException | SAXException | IOException | WrongDocumentExtensionException ex)
         {
