@@ -76,6 +76,8 @@ public class SplitterTask extends Task
             Message inputMessage = inputSlot.read();
 
             Document document = inputMessage.getDocument();
+            Node orderIdNode = document.getElementsByTagName("order_id").item(0);
+            
             Document metadataDocument = inputMessage.getDocumentMetaData();
             String xpathExpression = getxPathExpression();
 
@@ -91,11 +93,15 @@ public class SplitterTask extends Task
                 DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();              
 
+                //Crear la orden_id en el metadata
+                Element orderIDElement = (Element) metadataDocument.importNode(orderIdNode, true);               
+                
                 // Crear la etiqueta <splitterID> y agregarla a metadataRoot
                 Element splitterIDElement = metadataDocument.createElement(SPLITTER_METADATA_TAG);
                 splitterIDElement.appendChild(metadataDocument.createTextNode(String.valueOf(splitterCounter)));
 
                 Element metadataRoot = metadataDocument.getDocumentElement();
+                metadataRoot.appendChild(orderIDElement);
                 metadataRoot.appendChild(splitterIDElement);
 
                 // Iterar sobre los nodos seleccionados
