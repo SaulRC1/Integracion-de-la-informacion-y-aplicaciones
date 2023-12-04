@@ -21,12 +21,12 @@ public class EntryExitPort extends Port
 
     public void write(Message message)
     {
-
+        this.writeSlot.write(message);
     }
 
-    public Message read(Message message)
+    public Message read()
     {
-        return null;
+        return readSlot.read();
     }
 
     public Slot getReadSlot()
