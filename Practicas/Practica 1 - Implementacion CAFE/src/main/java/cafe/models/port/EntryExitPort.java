@@ -9,43 +9,53 @@ import cafe.models.slot.Slot;
  */
 public class EntryExitPort extends Port
 {
+    private Slot outputSlot;
+    private Slot inputSlot;
 
-    private Slot readSlot;
-    private Slot writeSlot;
-
-    public EntryExitPort(Slot readSlot, Slot writeSlot)
+    public EntryExitPort(Slot outputSlot, Slot inputSlot)
     {
-        this.readSlot = readSlot;
-        this.writeSlot = writeSlot;
+        this.outputSlot = outputSlot;
+        this.inputSlot = inputSlot;
     }
 
-    public void write(Message message)
+    public void writeIntoInputSlot(Message message)
     {
-        this.writeSlot.write(message);
+        this.inputSlot.write(message);
+    }
+    
+    public void writeIntoOutputSlot(Message message)
+    {
+        this.outputSlot.write(message);
     }
 
-    public Message read()
+    public Message readFromOutputSlot()
     {
-        return readSlot.read();
+        return outputSlot.read();
+    }
+    
+    public Message readFromInputSlot()
+    {
+        return inputSlot.read();
     }
 
-    public Slot getReadSlot()
+    public Slot getOutputSlot()
     {
-        return readSlot;
+        return outputSlot;
     }
 
-    public void setReadSlot(Slot readSlot)
+    public void setOutputSlot(Slot outputSlot)
     {
-        this.readSlot = readSlot;
+        this.outputSlot = outputSlot;
     }
 
-    public Slot getWriteSlot()
+    public Slot getInputSlot()
     {
-        return writeSlot;
+        return inputSlot;
     }
 
-    public void setWriteSlot(Slot writeSlot)
+    public void setInputSlot(Slot inputSlot)
     {
-        this.writeSlot = writeSlot;
+        this.inputSlot = inputSlot;
     }
+    
 }
