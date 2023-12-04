@@ -27,10 +27,18 @@ public class DrinksBarmanTranslator implements Translator
         Node drinkNameNode = originalMessageBody.getElementsByTagName("name")
                 .item(0);
         
-        Node importedDrinkNameNode= translatedMessageBody.importNode(drinkNameNode, true);
+        Node importedDrinkNameNode = translatedMessageBody.importNode(drinkNameNode, true);
         translatedMessageBody.appendChild(importedDrinkNameNode);
+        
+        Document translatedMessageMetadata = translatedMessage.getDocumentMetaData();
+        
+        Document originalMessageMetadata = msg.getDocumentMetaData();
+        
+        Node orderIdNode = originalMessageMetadata.getElementsByTagName("order_id").item(0);
+        
+        Node importedOrderIdNode = translatedMessageMetadata.importNode(orderIdNode, true);
+        translatedMessageMetadata.getDocumentElement().appendChild(importedOrderIdNode);
         
         outputSlot.write(translatedMessage);
     }
-    
 }
