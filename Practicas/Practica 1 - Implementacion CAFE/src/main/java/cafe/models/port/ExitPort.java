@@ -20,6 +20,11 @@ public class ExitPort extends Port
         super();
         this.slot = slot;
     }
+    
+    public void write(Message message)
+    {
+        this.slot.write(message);
+    }
 
     /**
      * This method will read a message from the slot
