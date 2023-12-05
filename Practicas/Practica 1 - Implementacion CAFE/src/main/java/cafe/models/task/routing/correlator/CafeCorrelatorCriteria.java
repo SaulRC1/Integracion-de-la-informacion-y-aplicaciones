@@ -10,35 +10,42 @@ import java.util.List;
  */
 public class CafeCorrelatorCriteria implements CorrelatorCriteria
 {
-    private int turnoOutputslot = 0;
-    
     @Override
-    public void applyCriteria(Message msg, List<Slot> intputSlots, List<Slot> outputSlots)
+    public void applyCriteria(List<Slot> inputSlots, List<Slot> outputSlots)
     {
-        String idOrder = msg.getDocumentMetaData().getElementsByTagName("order_id").item(0).getTextContent();
+        Slot replicatorOutputSlot = inputSlots.get(0);
+        Slot correlatorOutputSlot_1 = outputSlots.get(0);
+        Slot correlatorOutputSlot_2 = outputSlots.get(1);
 
-        for (Slot intputSlot : intputSlots)
+        Message messageFromReplicator;
+
+        while ((messageFromReplicator = replicatorOutputSlot.read()) != null)
         {
-            List<Message> messages = intputSlot.getMessages();
-            for (Message message : messages)
+            correlatorOutputSlot_1.write(messageFromReplicator);
+        }
+
+        Slot barmanOutputSlot = inputSlots.get(1);
+
+        List<Message> correlatorMessages = correlatorOutputSlot_1.getMessages();
+        List<Message> barmanMessagesOutputSlot = barmanOutputSlot.getMessages();
+
+        for (Message correlatorMessage : correlatorMessages)
+        {
+            String orderId = correlatorMessage.getDocumentMetaData().getElementsByTagName("order_id").item(0).getTextContent();
+            String drinkName = correlatorMessage.getDocument().getElementsByTagName("name").item(0).getTextContent();
+
+            Message correspondingMessage = null;
+            for (Message message : barmanMessagesOutputSlot)
             {
-                if (idOrder.equals(message.getDocumentMetaData().getElementsByTagName("order_id").item(0).getTextContent()))
+                String orderIdBarman = message.getDocumentMetaData().getElementsByTagName("order_id").item(0).getTextContent();
+                String drinkNameBarman = message.getDocumentMetaData().getElementsByTagName("name").item(0).getTextContent();
+                if (orderId.equals(orderIdBarman) && drinkName.equals(drinkNameBarman))
                 {
-                    writeCorrelatedMessages(message, outputSlots);
+                    correspondingMessage = message;
+                    break;
                 }
             }
-        }
-        turnoOutputslot = (turnoOutputslot + 1) % outputSlots.size();
-    }
-
-    private void writeCorrelatedMessages(Message message, List<Slot> outputSlots)
-    {       
-        if (turnoOutputslot == 0)
-        {
-            outputSlots.get(0).write(message);
-        } else
-        {
-            outputSlots.get(1).write(message);
+            correlatorOutputSlot_2.write(correspondingMessage);
         }
     }
 }
