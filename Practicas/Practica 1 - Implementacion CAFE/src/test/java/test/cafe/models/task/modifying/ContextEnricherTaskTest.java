@@ -40,7 +40,7 @@ public class ContextEnricherTaskTest
             inputSlot.write(message);
             contextSlot.write(message2);
 
-            ContextEnricherTask contextEnricher = new ContextEnricherTask(inputSlot, outPutSlot, contextSlot, "/cafe_order/drinks/drink");
+            ContextEnricherTask contextEnricher = new ContextEnricherTask(inputSlot, outPutSlot, contextSlot, "drink");
 
             contextEnricher.doTask();
 
