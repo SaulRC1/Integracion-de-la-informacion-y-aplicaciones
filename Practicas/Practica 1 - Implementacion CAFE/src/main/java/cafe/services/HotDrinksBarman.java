@@ -118,7 +118,7 @@ public class HotDrinksBarman
             Node drinkNameNodeMetadata = drinkInformationMessageMetadata.createElement("name");
             drinkNameNodeMetadata.setTextContent(drinkName);
             
-            drinkInformationMessageMetadata.getDocumentElement().appendChild(drinkNameNode);
+            drinkInformationMessageMetadata.getDocumentElement().appendChild(drinkNameNodeMetadata);
             
             Message drinkInformationMessage = new Message(drinkInformationMessageBody, 
                     drinkInformationMessageMetadata);
