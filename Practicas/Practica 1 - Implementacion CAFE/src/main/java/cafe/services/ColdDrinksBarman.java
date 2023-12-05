@@ -121,8 +121,15 @@ public final class ColdDrinksBarman
             
             Document drinkInformationMessageBody = formatDrinkInformation(drinkName);
             
+            Document drinkInformationMessageMetadata = msg.getDocumentMetaData();
+            
+            Node drinkNameNodeMetadata = drinkInformationMessageMetadata.createElement("name");
+            drinkNameNodeMetadata.setTextContent(drinkName);
+            
+            drinkInformationMessageMetadata.getDocumentElement().appendChild(drinkNameNode);
+            
             Message drinkInformationMessage = new Message(drinkInformationMessageBody, 
-                    msg.getDocumentMetaData());
+                    drinkInformationMessageMetadata);
             
             entryExitPort.writeIntoOutputSlot(drinkInformationMessage);
         }
