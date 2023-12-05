@@ -7,6 +7,8 @@ import cafe.models.slot.Slot;
 import cafe.models.task.routing.CorrelatorTask;
 import cafe.models.task.routing.DistributorTask;
 import cafe.models.task.routing.ReplicatorTask;
+import cafe.models.task.routing.correlator.CafeCorrelatorCriteria;
+import cafe.models.task.routing.correlator.CorrelatorCriteria;
 import cafe.models.task.routing.distributor.CafeDistributorCriteria;
 import cafe.models.task.routing.distributor.DistributorCriteria;
 import cafe.models.task.transforming.SplitterTask;
@@ -151,11 +153,10 @@ public class Practica1_IIA_CAFE
             XMLDocumentParser.printDocument(messageMetadata.getDocumentElement());
             XMLDocumentParser.printDocument(messageBody.getDocumentElement());
         }*/
-        
-        
+                
         List<Slot> inputSlots = new ArrayList<>();
         List<Slot> outputSlots = new ArrayList<>();
-        String CorrelatorXpathExpression = "/metadata/order_id/text()";
+        CorrelatorCriteria criteria = new CafeCorrelatorCriteria();
         
         Slot correlatorOutput_1 = new Slot();
         Slot correlatorOutput_2 = new Slot();
@@ -167,7 +168,7 @@ public class Practica1_IIA_CAFE
         inputSlots.add(correlatorInputSlot_1);
         inputSlots.add(correlatorInputSlot_2);
         
-        CorrelatorTask correlator = new CorrelatorTask(inputSlots, outputSlots, CorrelatorXpathExpression);
+        CorrelatorTask correlator = new CorrelatorTask(inputSlots, outputSlots, criteria);
         correlator.doTask();
         
         /*List<Message> inputMessages = correlator.getOutputSlots().get(0).getMessages();

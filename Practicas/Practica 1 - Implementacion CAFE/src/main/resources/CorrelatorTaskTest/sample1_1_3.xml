@@ -1,0 +1,13 @@
+<drink_information>
+    <brand>
+        The Coca-Cola Company
+    </brand>
+
+    <quantity_served>
+        330ml
+    </quantity_served>
+
+    <serving_style>
+        can
+    </serving_style>
+</drink_information>
