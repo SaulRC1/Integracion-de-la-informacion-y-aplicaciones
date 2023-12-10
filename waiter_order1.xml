@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><waiter_order><metadata/><drinks>
+            <name>cafe</name>
+            <type>hot</type>
+        <drink_information><brand>Nescafé</brand><quantity_served>150ml</quantity_served><serving_style>cup of coffee</serving_style></drink_information>
+            <name>cafe</name>
+            <type>hot</type>
+        <drink_information><brand>Nescafé</brand><quantity_served>150ml</quantity_served><serving_style>cup of coffee</serving_style></drink_information>
+            <name>te</name>
+            <type>hot</type>
+        <drink_information><brand>Hornimans</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>tila</name>
+            <type>hot</type>
+        <drink_information><brand>La Barraca</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>chocolate</name>
+            <type>hot</type>
+        <drink_information><brand>Valor</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>cafe</name>
+            <type>hot</type>
+        <drink_information><brand>Nescafé</brand><quantity_served>150ml</quantity_served><serving_style>cup of coffee</serving_style></drink_information>
+            <name>te</name>
+            <type>hot</type>
+        <drink_information><brand>Hornimans</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>tila</name>
+            <type>hot</type>
+        <drink_information><brand>La Barraca</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>te</name>
+            <type>hot</type>
+        <drink_information><brand>Hornimans</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>tila</name>
+            <type>hot</type>
+        <drink_information><brand>La Barraca</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>te</name>
+            <type>hot</type>
+        <drink_information><brand>Hornimans</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>chocolate</name>
+            <type>hot</type>
+        <drink_information><brand>Valor</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>te</name>
+            <type>hot</type>
+        <drink_information><brand>Hornimans</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>cafe</name>
+            <type>hot</type>
+        <drink_information><brand>Nescafé</brand><quantity_served>150ml</quantity_served><serving_style>cup of coffee</serving_style></drink_information>
+            <name>chocolate</name>
+            <type>hot</type>
+        <drink_information><brand>Valor</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>cafe</name>
+            <type>hot</type>
+        <drink_information><brand>Nescafé</brand><quantity_served>150ml</quantity_served><serving_style>cup of coffee</serving_style></drink_information>
+            <name>cerveza</name>
+            <type>cold</type>
+        <drink_information><brand>El Águila</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>guarana</name>
+            <type>cold</type>
+        <drink_information><brand>None</brand><quantity_served>350ml</quantity_served><serving_style>cup of wine</serving_style></drink_information>
+            <name>guarana</name>
+            <type>cold</type>
+        <drink_information><brand>None</brand><quantity_served>350ml</quantity_served><serving_style>cup of wine</serving_style></drink_information>
+            <name>tonica</name>
+            <type>cold</type>
+        <drink_information><brand>Schweppes</brand><quantity_served>20cl</quantity_served><serving_style>bottle</serving_style></drink_information>
+            <name>tonica</name>
+            <type>cold</type>
+        <drink_information><brand>Schweppes</brand><quantity_served>20cl</quantity_served><serving_style>bottle</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information>
+            <name>guarana</name>
+            <type>cold</type>
+        <drink_information><brand>None</brand><quantity_served>350ml</quantity_served><serving_style>cup of wine</serving_style></drink_information>
+            <name>cerveza</name>
+            <type>cold</type>
+        <drink_information><brand>El Águila</brand><quantity_served>250ml</quantity_served><serving_style>glass</serving_style></drink_information>
+            <name>tonica</name>
+            <type>cold</type>
+        <drink_information><brand>Schweppes</brand><quantity_served>20cl</quantity_served><serving_style>bottle</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information>
+            <name>guarana</name>
+            <type>cold</type>
+        <drink_information><brand>None</brand><quantity_served>350ml</quantity_served><serving_style>cup of wine</serving_style></drink_information>
+            <name>tonica</name>
+            <type>cold</type>
+        <drink_information><brand>Schweppes</brand><quantity_served>20cl</quantity_served><serving_style>bottle</serving_style></drink_information>
+            <name>tonica</name>
+            <type>cold</type>
+        <drink_information><brand>Schweppes</brand><quantity_served>20cl</quantity_served><serving_style>bottle</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information>
+            <name>coca-cola</name>
+            <type>cold</type>
+        <drink_information><brand>The Coca-Cola Company</brand><quantity_served>330ml</quantity_served><serving_style>can</serving_style></drink_information></drinks></waiter_order>

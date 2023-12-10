@@ -13,6 +13,7 @@ public class MergerTask extends Task
 {
     /**
      * Will build a Merger
+     *
      * @param inputSlots Numbers of input slots that the task in going to have
      * @param outputSlot Numbers of output slots that the task in going to have
      */
@@ -23,8 +24,8 @@ public class MergerTask extends Task
 
     /**
      * <p>
-     * This method will join the messages stored in the differents inputs slots and then
-     * put it all on the output slot.
+     * This method will join the messages stored in the differents inputs slots
+     * and then put it all on the output slot.
      * </p>
      */
     @Override
@@ -32,11 +33,13 @@ public class MergerTask extends Task
     {
         List<Slot> inputSlots = getInputSlots();
         Slot outPutSlot = getOutputSlots().get(0);
-        
-        for (int i = 0; i < inputSlots.size(); i++) {
-            Message message = inputSlots.get(i).read();
-            if (message != null) {
-                outPutSlot.write(message);
+
+        for (Slot inputSlot : inputSlots)
+        {
+            Message msg;
+            while ((msg = inputSlot.read()) != null)
+            {
+                outPutSlot.write(msg);
             }
         }
     }

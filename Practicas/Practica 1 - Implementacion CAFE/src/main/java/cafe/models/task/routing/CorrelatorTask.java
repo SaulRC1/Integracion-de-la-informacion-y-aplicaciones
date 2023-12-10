@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class CorrelatorTask extends Task
 {
+
     private CorrelatorCriteria criteria;
 
     /**
@@ -37,14 +38,6 @@ public class CorrelatorTask extends Task
     @Override
     public void doTask()
     {
-        List<Slot> slots = this.getInputSlots();
-        for (Slot slot : slots)
-        {
-            Message msg;
-            while ((msg = slot.read()) != null)        
-            {
-                criteria.applyCriteria(msg, this.getInputSlots(), this.getOutputSlots());
-            }
-        }
+        criteria.applyCriteria(this.getInputSlots(), this.getOutputSlots());
     }
 }

@@ -103,7 +103,7 @@ public class AggregatorTask extends Task
             try
             {
                 Node splitterIdNode = (Node) xpathParser.executeXPathExpression(
-                        "/metadata/splitterId", messageMetadata,
+                        "/metadata/splitterID", messageMetadata,
                         XPathConstants.NODE);
 
                 long splitterId = Long.parseLong(splitterIdNode.getChildNodes().item(0).getNodeValue());
@@ -138,7 +138,7 @@ public class AggregatorTask extends Task
             XPathParser xpathParser = new XPathParser();
             
             Node splitterIdNode = (Node) xpathParser.executeXPathExpression(
-                    "/metadata/splitterId", messageMetadata,
+                    "/metadata/splitterID", messageMetadata,
                     XPathConstants.NODE);
             
             long splitterId = Long.parseLong(splitterIdNode.getChildNodes().item(0).getNodeValue());

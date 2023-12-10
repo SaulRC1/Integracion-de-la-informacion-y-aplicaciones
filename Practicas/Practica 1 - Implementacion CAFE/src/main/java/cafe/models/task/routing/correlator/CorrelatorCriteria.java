@@ -1,6 +1,5 @@
 package cafe.models.task.routing.correlator;
 
-import cafe.models.message.Message;
 import cafe.models.slot.Slot;
 import java.util.List;
 
@@ -10,5 +9,5 @@ import java.util.List;
  */
 public interface CorrelatorCriteria
 {
-    public void applyCriteria(Message msg, List<Slot> inputSlots, List<Slot> outputSlots);
+    public void applyCriteria(List<Slot> inputSlots, List<Slot> outputSlots);
 }

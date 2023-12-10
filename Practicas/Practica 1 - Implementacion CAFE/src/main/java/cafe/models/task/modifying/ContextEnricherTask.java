@@ -17,13 +17,16 @@ import org.w3c.dom.NodeList;
  */
 public class ContextEnricherTask extends Task
 {
+
     private String placeToContext;
 
     /**
      * Will build a context enricher
+     *
      * @param inputSlot Numbers of input slots that the task in going to have
      * @param outputSlot Numbers of output slots that the task in going to have
-     * @param contextSlot The slot where the task in going to take the context to add
+     * @param contextSlot The slot where the task in going to take the context
+     * to add
      * @param placeToContext The place where we want to put the new information
      */
     public ContextEnricherTask(Slot inputSlot, Slot outputSlot, Slot contextSlot, String placeToContext)
@@ -45,46 +48,46 @@ public class ContextEnricherTask extends Task
         Slot outputSlot = getOutputSlots().get(0);
         Slot contextSlot = getInputSlots().get(1);
 
-        // Retrieve messages from slots
-        Message inputMessage = inputSlot.read();
-        Message contextMessage = contextSlot.read();
+        Message msg;
 
-        // Get documents from messages
-        Document inputDocument = inputMessage.getDocument();
-        Document contextDocument = contextMessage.getDocument();
+        while ((msg = inputSlot.read()) != null)
+        {
+            // Retrieve messages from slots
+            Message contextMessage = contextSlot.read();
 
-        // Add the content of the context document to the input document
-        mergeDocuments(inputDocument, contextDocument, this.placeToContext);
+            // Get documents from messages
+            Document inputDocument = msg.getDocument();
+            Document contextDocument = contextMessage.getDocument();
 
-        // Write the updated input document to the output slot
-        outputSlot.write(inputMessage);
+            // Add the content of the context document to the input document
+            mergeDocuments(inputDocument, contextDocument, this.placeToContext);
+
+            // Write the updated input document to the output slot
+            outputSlot.write(msg);
+        }
     }
 
-    private void mergeDocuments(Document target, Document source, String placeToContext) {
-        try {
+    private void mergeDocuments(Document target, Document source, String placeToContext)
+    {
+        try
+        {
             // Find the target node where content should be added based on the placeToContext parameter
             NodeList targetNodes = target.getElementsByTagName(placeToContext);
 
-            if (targetNodes.getLength() > 0) {
+            if (targetNodes.getLength() > 0)
+            {
                 Node targetNode = targetNodes.item(0);
 
-                // Get the list of child nodes from the context document
-                NodeList sourceChildNodes = source.getDocumentElement().getChildNodes();
-
-                // Iterate over the child nodes of the context document
-                for (int i = 0; i < sourceChildNodes.getLength(); i++) {
-                    Node sourceNode = sourceChildNodes.item(i);
-
-                    // Clone the node from the context document to avoid modifying it directly
-                    Node copiedNode = target.importNode(sourceNode, true);
-
-                    // Append the cloned node to the target node
-                    targetNode.appendChild(copiedNode);
-                }
-            } else {
+                // Get the root node from the context document
+                Node sourceRootNode = source.getDocumentElement();
+                Node importedSourceRootNode = target.importNode(sourceRootNode, true);
+                targetNode.appendChild(importedSourceRootNode);             
+            } else
+            {
                 System.out.println("Target node not found: " + placeToContext);
             }
-        } catch (DOMException ex) {
+        } catch (DOMException ex)
+        {
             Logger.getLogger(ContextEnricherTask.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
